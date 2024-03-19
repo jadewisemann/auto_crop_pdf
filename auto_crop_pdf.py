@@ -3,10 +3,13 @@ import os
 from PyPDF2 import PdfMerger
 merger = PdfMerger()
 
-# Get Input
-point_1 = ""
-point_2 = ""
-original_path = ""
+# Get Config
+import configparser
+config = configparser.ConfigParser()
+config.read('private/config.ini')
+point_1 = tuple(map(int, config.get('target', 'left_top').split(',')))
+point_2 = tuple(map(int, config.get('target', 'right_bottom').split(',')))
+original_path = str(config.get('target', 'path'))
 
 # Parse Input
 crop_area  = (point_1[0], point_1[1], point_2[0], point_2[1])
