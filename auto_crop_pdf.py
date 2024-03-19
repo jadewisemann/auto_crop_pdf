@@ -1,5 +1,6 @@
 from PIL import Image
 import os
+import shutil
 from PyPDF2 import PdfMerger
 merger = PdfMerger()
 
@@ -51,5 +52,9 @@ for pdf in [os.path.join(pdf_pages_path, file) for file in os.listdir(pdf_pages_
     
 merger.write(os.path.join(os.path.dirname(original_path), output_pdf_name))
 merger.close()
+
+# Remove Debris
+shutil.rmtree(cropped_img_path)
+shutil.rmtree(pdf_pages_path)
 
 print(f"PDF Merge Success.")
